@@ -1,0 +1,8 @@
+{
+  "name": "marionette.picky",
+  "version": "0.0.0",
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-mocha": "0.2.x"
+  }
+}
