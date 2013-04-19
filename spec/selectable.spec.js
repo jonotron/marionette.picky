@@ -14,12 +14,17 @@ describe('Selectable', function() {
   });
 
   describe('when calling #select()', function() {
+    beforeEach(function() {
+      // ensure we start off deselected
+      selectable.selected = false;
+    });
+
     it('sets selected to true', function() {
       selectable.select();
       expect(selectable.selected).to.equal(true);
     });
 
-    it("triggers 'selected'", function() {
+    it("triggers 'selected' with self", function() {
       // no-op trigger
       selectable.trigger = function() {};
       var spy = sinon.spy(selectable, 'trigger'); 
@@ -37,7 +42,7 @@ describe('Selectable', function() {
       expect(spy).to.have.been.called;
     });
 
-    it("does not trigger anything if already true", function() {
+    it("does not trigger anything if already selected", function() {
       selectable.trigger = function() {};
       var spy = sinon.spy(selectable, 'trigger');
 
@@ -46,12 +51,59 @@ describe('Selectable', function() {
       expect(spy).not.to.have.been.called;
     });
 
-    it("does not call onSelected already true", function() {
+    it("does not call onSelected already selected", function() {
       selectable.onSelected = function() {};
       var spy = sinon.spy(selectable, 'onSelected');
 
       selectable.selected = true;
       selectable.select();
+      expect(spy).not.to.have.been.called;
+    });
+  });
+
+  describe("when calling #deselect()", function() {
+    beforeEach(function() {
+      // ensure we start off selected
+      selectable.selected = true;
+    });
+
+    it("sets selected to false", function() {
+      selectable.deselect();
+      expect(selectable.selected).to.equal(false);
+    });
+
+    it("triggers 'deselected' with self", function() {
+      selectable.trigger = function() {};
+      var spy = sinon.spy(selectable, 'trigger');
+
+      selectable.deselect();
+      expect(spy).to.have.been.calledWith('deselected', selectable);
+    });
+
+    it("calls 'onDeselected'", function() {
+      // no-op onSelected
+      selectable.onDeselected = function() {};
+      var spy = sinon.spy(selectable, 'onDeselected'); 
+
+      selectable.deselect();
+      expect(spy).to.have.been.called;
+    });
+
+    it("does not trigger anything if already deselected", function() {
+      selectable.trigger = function() {};
+      var spy = sinon.spy(selectable, 'trigger');
+
+      selectable.selected = false;
+      selectable.deselect();
+      expect(spy).not.to.have.been.called;
+    });
+
+    it("does not call onDeselected if already deselected", function() {
+      selectable.onDeselected = function() {};
+      var spy = sinon.spy(selectable, 'onDeselected');
+
+      selectable.selected = false;
+      selectable.deselect();
       expect(spy).not.to.have.been.called;
     });
   });
