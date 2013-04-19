@@ -59,7 +59,7 @@ describe('Selectable', function() {
       selectable.select();
       expect(spy).not.to.have.been.called;
     });
-  });
+  }); // when calling #select()
 
   describe("when calling #deselect()", function() {
     beforeEach(function() {
@@ -105,6 +105,33 @@ describe('Selectable', function() {
       selectable.selected = false;
       selectable.deselect();
       expect(spy).not.to.have.been.called;
+    });
+  }); // when calling #deselect()
+
+  describe("when calling #toggleSelected", function() {
+    var selectSpy;
+    var deselectSpy;
+
+    beforeEach(function() {
+      // setup some spies on the select functions
+      selectSpy = sinon.spy(selectable, 'select');
+      deselectSpy = sinon.spy(selectable, 'deselect');
+    });
+
+    it("calls #select() if deselected", function() {
+      selectable.selected = false;
+      selectable.toggleSelected();
+
+      expect(selectSpy).to.have.been.called;
+      expect(deselectSpy).not.to.have.been.called;
+    });
+
+    it("calls #deselect() if selected", function() {
+      selectable.selected = true;
+      selectable.toggleSelected();
+
+      expect(selectSpy).not.to.have.been.called;
+      expect(deselectSpy).to.have.been.called;
     });
   });
 });
