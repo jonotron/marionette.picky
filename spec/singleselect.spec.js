@@ -29,5 +29,11 @@ describe("SingleSelect", function() {
       
       expect(selectable.select).to.have.been.called;
     });
+
+    it("should assign the current selected reference to the item", function() {
+       singleselect.selectItem(selectable);
+
+       expect(singleselect.selected).to.equal(selectable);
+    });
   });
 });

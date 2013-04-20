@@ -19,6 +19,7 @@
     selected: null,
 
     selectItem: function(item) {
+      this.selected = item;
       item.select(); 
     }
   }
