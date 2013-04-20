@@ -1,6 +1,7 @@
 describe("SingleSelect", function() {
   var singleselect;
   var selectable;
+  var selectable2;
 
   beforeEach(function() {
     // mixin onto a simple object
@@ -9,7 +10,8 @@ describe("SingleSelect", function() {
     // I've chosen not to mock up the selectable, as it just seems
     // like more work. Instead I get an actual selectable and spy
     // on it
-    selectable = _.extend({}, PickleMixins.Selectable);
+    selectable  = _.extend({}, PickleMixins.Selectable);
+    selectable2 = _.extend({}, PickleMixins.Selectable);
   });
 
   describe("when first created", function() {
@@ -34,6 +36,14 @@ describe("SingleSelect", function() {
        singleselect.selectItem(selectable);
 
        expect(singleselect.selected).to.equal(selectable);
+    });
+
+    it("should dereference an previously selected item", function() {
+      singleselect.selectItem(selectable);
+      singleselect.selectItem(selectable2);
+      
+      expect(singleselect.selected).to.not.equal(selectable);
+      expect(singleselect.selected).to.equal(selectable2);
     });
   });
 });
