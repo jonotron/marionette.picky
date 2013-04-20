@@ -56,6 +56,25 @@ describe("SingleSelect", function() {
         
         expect(selectable.deselect).to.have.been.called;
       });
+
+      describe("when selecting the previous item again", function() {
+        it("should keep the item as selected", function() {
+          singleselect.selectItem(selectable);
+          expect(singleselect.selected).to.equal(selectable);
+        });
+
+        it("should not try to call #deselect()", function() {
+          var spy = sinon.spy(selectable, 'deselect');
+          singleselect.selectItem(selectable);
+          expect(selectable.deselect).to.not.have.been.called;
+        });
+
+        it("should not try to call #select()", function() {
+          var spy = sinon.spy(selectable, 'select');
+          singleselect.selectItem(selectable);
+          expect(selectable.select).to.not.have.been.called;
+        });
+      });
     });
   });
 });
