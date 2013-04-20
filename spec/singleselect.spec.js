@@ -38,12 +38,24 @@ describe("SingleSelect", function() {
        expect(singleselect.selected).to.equal(selectable);
     });
 
-    it("should dereference an previously selected item", function() {
-      singleselect.selectItem(selectable);
-      singleselect.selectItem(selectable2);
-      
-      expect(singleselect.selected).to.not.equal(selectable);
-      expect(singleselect.selected).to.equal(selectable2);
+    describe("when a previous item is already selected", function() {
+      beforeEach(function() {
+        singleselect.selectItem(selectable);
+      });
+
+      it("should dereference an previously selected item", function() {
+        singleselect.selectItem(selectable2);
+
+        expect(singleselect.selected).to.not.equal(selectable);
+        expect(singleselect.selected).to.equal(selectable2);
+      });
+
+      it("should call the previous items #deselect() method", function() {
+        var spy = sinon.spy(selectable, 'deselect'); 
+        singleselect.selectItem(selectable2);
+        
+        expect(selectable.deselect).to.have.been.called;
+      });
     });
   });
 });
