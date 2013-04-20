@@ -33,9 +33,18 @@ describe("SingleSelect", function() {
     });
 
     it("should assign the current selected reference to the item", function() {
-       singleselect.selectItem(selectable);
+      singleselect.selectItem(selectable);
 
-       expect(singleselect.selected).to.equal(selectable);
+      expect(singleselect.selected).to.equal(selectable);
+    });
+
+    it("should call #onSelectItem() if defined", function() {
+      // no-op onSelectItem
+      singleselect.onSelectItem = function() {};
+      var spy = sinon.spy(singleselect, 'onSelectItem'); 
+
+      singleselect.selectItem(selectable);
+      expect(singleselect.onSelectItem).to.have.been.calledWith(selectable);
     });
 
     describe("when a previous item is already selected", function() {
@@ -73,6 +82,15 @@ describe("SingleSelect", function() {
           var spy = sinon.spy(selectable, 'select');
           singleselect.selectItem(selectable);
           expect(selectable.select).to.not.have.been.called;
+        });
+
+        it("should not try to call #onSelectItem()", function() {
+          // no-on onSelectItem
+          singleselect.onSelectItem = function() {}; 
+          var spy = sinon.spy(singleselect, 'onSelectItem');
+
+          singleselect.selectItem(selectable);
+          expect(singleselect.onSelectItem).to.not.have.been.called;
         });
       });
     });
