@@ -1,30 +1,22 @@
-Backbone.Marionette.Picky.Selectable = (function (Backbone, _) {
-  var Selectable = {};
-  _.extend(Selectable.prototype, {
-    selected: false, 
+(function() {
+  
+  // store a reference to the global object
+  var root = this;
 
-    select: function() {
-      if (this.selected) { return ;}
+  var PickleMixins;
+  var SingleSelect;
 
-      this.selected = true;
-      this.trigger('selected', this);
-    },
+  if (typeof exports !== 'undefined') {
+    // just export SingleSelect
+    SingleSelect = exports; 
+  } else {
+    // install PickleMixins if not already defined on the global object
+    PickleMixins = root.PickleMixins = root.PickleMixins || {};
+  }
 
-    deselect: function() {
-      if (!this.selected) { return; }
+  SingleSelect = PickleMixins.SingleSelect = {
+    selectedLength: 0,
+    selected: null
+  }
 
-      this.selected = false;
-      this.trigger('deselected', this);
-    },
-
-    toggleSelected: function() {
-      if (this.selected) {
-        this.deselect();
-      } else {
-        this.select();
-      }
-    }
-  });
-
-  return Selectable;
-});
+}).call(this);
