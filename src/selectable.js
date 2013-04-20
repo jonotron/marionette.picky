@@ -4,14 +4,17 @@
   var root = this;
 
   var PickleMixins;
+  var Selectable;
 
   if (typeof exports !== 'undefined') {
-    PickleMixins = exports; 
+    // just export Selectable
+    Selectable = exports; 
   } else {
-    PickleMixins = root.PickleMixins = {};
+    // install PickleMixins if not already defined on the global object
+    PickleMixins = root.PickleMixins = root.PickleMixins || {};
   }
 
-  var Selectable = PickleMixins.Selectable = {
+  Selectable = PickleMixins.Selectable = {
     selected: false,
 
     select: function() {
