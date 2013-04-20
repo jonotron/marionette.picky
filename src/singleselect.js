@@ -16,7 +16,11 @@
 
   SingleSelect = PickleMixins.SingleSelect = {
     selectedLength: 0,
-    selected: null
+    selected: null,
+
+    selectItem: function(item) {
+      item.select(); 
+    }
   }
 
 }).call(this);
