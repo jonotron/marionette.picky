@@ -30,6 +30,14 @@
 
       if (typeof this.onSelectItem === 'function')
         this.onSelectItem(item);
+    },
+
+    deselectItem: function(item) {
+      this.selected = null;
+      item.deselect();
+
+      if (typeof this.onDeselectItem === 'function')
+        this.onDeselectItem(item);
     }
   }
 

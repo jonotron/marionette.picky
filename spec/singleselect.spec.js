@@ -22,7 +22,7 @@ describe("SingleSelect", function() {
     it("should have a default selected object of null", function() {
       expect(singleselect.selected).to.be.null; 
     });
-  });
+  }); // when first created
 
   describe("when selecting an item with #selectItem()", function() {
     it("should call the selectable's #select() method", function() {
@@ -92,7 +92,35 @@ describe("SingleSelect", function() {
           singleselect.selectItem(selectable);
           expect(singleselect.onSelectItem).to.not.have.been.called;
         });
-      });
+      }); // when selecting the previous item again
+    }); // when a previous item is already selected
+  }); // when selecting an item with #selectItem()
+
+  describe("when deselecting and item with #deselectItem", function() {
+    beforeEach(function() {
+      singleselect.selectItem(selectable);
+    });
+
+    it("should call the selectable's #deselect() method", function() {
+      var spy = sinon.spy(selectable, 'deselect'); 
+      singleselect.deselectItem(selectable);
+
+      expect(selectable.deselect).to.have.been.called;
+    });  
+
+    it("should dereference the current selected reference", function() {
+      singleselect.deselectItem(selectable);
+
+      expect(singleselect.selected).to.be.null;
+    });
+
+    it("should call #onDeselectItem() if defined", function() {
+      // no-op onSelectItem
+      singleselect.onDeselectItem = function() {};
+      var spy = sinon.spy(singleselect, 'onDeselectItem'); 
+
+      singleselect.deselectItem(selectable);
+      expect(singleselect.onDeselectItem).to.have.been.calledWith(selectable);
     });
   });
-});
+}); // SingleSelect
