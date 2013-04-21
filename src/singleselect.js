@@ -33,6 +33,8 @@
     },
 
     deselectItem: function(item) {
+      if (this.selected !== item) return;
+
       this.selected = null;
       item.deselect();
 

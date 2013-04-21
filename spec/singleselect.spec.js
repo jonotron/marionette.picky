@@ -122,5 +122,31 @@ describe("SingleSelect", function() {
       singleselect.deselectItem(selectable);
       expect(singleselect.onDeselectItem).to.have.been.calledWith(selectable);
     });
+
+    describe("when deselecting an item that is not already selected", function() {
+      
+      it("should not dereference the current selected reference", function() {
+        singleselect.deselectItem(selectable2);
+        expect(singleselect.selected).to.equal(selectable);
+      });
+
+      it("should not call the selectables #deselect() method", function() {
+        var spy = sinon.spy(selectable, 'deselect');
+        var spy2 = sinon.spy(selectable2, 'deselect');
+
+        singleselect.deselectItem(selectable2);
+        expect(selectable.deselect).to.not.have.been.called;
+        expect(selectable.deselect).to.not.have.been.called;
+      });
+
+      it("should not call #onDeslectItem()", function() {
+        //no-op onDeselectItem
+        singleselect.onDeselectItem = function() {};
+        var spy = sinon.spy(singleselect, 'onDeselectItem');
+        
+        singleselect.deselectItem(selectable2);
+        expect(singleselect.onDeselectItem).to.not.have.been.called;
+      })
+    });
   });
 }); // SingleSelect
