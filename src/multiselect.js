@@ -16,7 +16,10 @@
 
   MultiSelect = PickleMixins.MultiSelect = {
     selected: [],
-
+    
+    selectItem: function(item) {
+      item.select();   
+    }
   }
 
 }).call(this);

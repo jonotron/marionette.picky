@@ -25,7 +25,7 @@ describe("MultiSelect", function() {
   describe("when selecting an item with #selectItem()", function() {
     it("should call the selectable's #select() method", function() {
       var spy = sinon.spy(selectable, 'select');
-      singleselect.selectItem(selectable); 
+      multi.selectItem(selectable); 
       
       expect(selectable.select).to.have.been.called;
     });
