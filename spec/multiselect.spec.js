@@ -63,6 +63,25 @@ describe("MultiSelect", function() {
         expect(multi.selected).to.contain(selectable)
           .and.to.contain(selectable2);
       });
+
+      describe("when selecting a previous item again", function() {
+        it("should keep the item in the selected list", function() {
+          multi.selectItem(selectable);
+          expect(multi.selected).to.contain(selectable);
+        });
+
+        it("should not try to call #deselect()", function() {
+          var spy = sinon.spy(selectable, 'deselect');
+          multi.selectItem(selectable);  
+          expect(selectable.deselect).to.not.have.been.called;
+        });
+        
+        it("should not try to call #select()", function() {
+          var spy = sinon.spy(selectable, 'select');
+          multi.selectItem(selectable);
+          expect(selectable.select).to.not.have.been.called;
+        });
+      });
     }); // when a previous item is already selected
   }); // when selecting an item with #selectItem()
 
