@@ -39,17 +39,30 @@ describe("MultiSelect", function() {
       expect(multi.onSelectItem).to.have.been.calledWith(selectable);
     });
 
-    it("should add the selected item to the list", function() {
+    it("should add the selected item to the selected list", function() {
       multi.selectItem(selectable);
 
       expect(multi.selected).to.contain(selectable);
     });
 
-    it.skip("should add all selected items to the list", function() {
+    it("should add all selected items to the selected list", function() {
+      multi.selectItem(selectable);
+      multi.selectItem(selectable2);
+
+      expect(multi.selected).to.contain(selectable)
+        .and.to.contain(selectable2);
     });
 
     describe("when a previous item is already selected", function() {
-      it.skip("should not try calling #deselect()", function() {
+      beforeEach(function() {
+        multi.selectItem(selectable);
+      });
+
+      it("should not try calling #deselect()", function() {
+        var spy = sinon.spy(selectable, 'deselect');
+        multi.selectItem(selectable2);
+
+        expect(selectable.deselect).to.not.have.been.called;
       });
     }); // when a previous item is already selected
   }); // when selecting an item with #selectItem()
