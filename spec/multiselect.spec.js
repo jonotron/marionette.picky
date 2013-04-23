@@ -39,7 +39,10 @@ describe("MultiSelect", function() {
       expect(multi.onSelectItem).to.have.been.calledWith(selectable);
     });
 
-    it.skip("should add the selected item to the list", function() {
+    it("should add the selected item to the list", function() {
+      multi.selectItem(selectable);
+
+      expect(multi.selected).to.contain(selectable);
     });
 
     it.skip("should add all selected items to the list", function() {

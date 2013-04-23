@@ -18,6 +18,7 @@
     selected: [],
     
     selectItem: function(item) {
+      this.selected.push(item);
       item.select();   
 
       if (typeof this.onSelectItem === 'function')
