@@ -32,11 +32,11 @@ describe("MultiSelect", function() {
 
     it("should call #onSelectItem() if defined", function() {
       // no-op onSelectItem
-      singleselect.onSelectItem = function() {};
-      var spy = sinon.spy(singleselect, 'onSelectItem'); 
+      multi.onSelectItem = function() {};
+      var spy = sinon.spy(multi, 'onSelectItem'); 
 
-      singleselect.selectItem(selectable);
-      expect(singleselect.onSelectItem).to.have.been.calledWith(selectable);
+      multi.selectItem(selectable);
+      expect(multi.onSelectItem).to.have.been.calledWith(selectable);
     });
 
     it.skip("should add the selected item to the list", function() {

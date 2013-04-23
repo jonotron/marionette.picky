@@ -19,6 +19,9 @@
     
     selectItem: function(item) {
       item.select();   
+
+      if (typeof this.onSelectItem === 'function')
+        this.onSelectItem(item);
     }
   }
 
