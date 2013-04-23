@@ -45,14 +45,6 @@ describe("MultiSelect", function() {
       expect(multi.selected).to.contain(selectable);
     });
 
-    it("should add all selected items to the selected list", function() {
-      multi.selectItem(selectable);
-      multi.selectItem(selectable2);
-
-      expect(multi.selected).to.contain(selectable)
-        .and.to.contain(selectable2);
-    });
-
     describe("when a previous item is already selected", function() {
       beforeEach(function() {
         multi.selectItem(selectable);
@@ -63,6 +55,13 @@ describe("MultiSelect", function() {
         multi.selectItem(selectable2);
 
         expect(selectable.deselect).to.not.have.been.called;
+      });
+
+      it("should add a new item to the selected list", function() {
+        multi.selectItem(selectable2);
+
+        expect(multi.selected).to.contain(selectable)
+          .and.to.contain(selectable2);
       });
     }); // when a previous item is already selected
   }); // when selecting an item with #selectItem()
