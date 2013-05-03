@@ -37,6 +37,9 @@
     },
 
     deselectItem: function(item) {
+      var index = this.selected.indexOf(item);
+
+      this.selected.splice(index, 1);
       item.deselect(); 
     }
   }

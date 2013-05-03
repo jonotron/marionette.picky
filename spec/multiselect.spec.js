@@ -110,6 +110,12 @@ describe("MultiSelect", function() {
 
       expect(selectable.deselect).to.have.been.called;
     });
+
+    it("should remove the item from the selected list", function() {
+      multi.deselectItem(selectable);
+
+      expect(multi.selected).to.not.contain(selectable);
+    });
   });
 
 }); // SingleSelect
