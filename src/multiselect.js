@@ -27,6 +27,8 @@
     },
     
     selectItem: function(item) {
+      if (this.isItemSelected(item)) return;
+
       this.selected.push(item);
       item.select();   
 
