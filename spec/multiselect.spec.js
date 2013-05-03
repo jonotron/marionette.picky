@@ -22,6 +22,20 @@ describe("MultiSelect", function() {
     });
   }); // when first created
 
+  describe("#isItemSelected", function() {
+    beforeEach(function() {
+      multi.selectItem(selectable);
+    });
+
+    it("should return true if the item is selected", function() {
+      expect(multi.isItemSelected(selectable)).to.be.true;
+    });
+
+    it("should return true if the item is selected", function() {
+      expect(multi.isItemSelected(selectable2)).to.be.false;
+    });
+  });
+
   describe("when selecting an item with #selectItem()", function() {
     it("should call the selectable's #select() method", function() {
       var spy = sinon.spy(selectable, 'select');

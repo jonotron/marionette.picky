@@ -16,6 +16,15 @@
 
   MultiSelect = PickleMixins.MultiSelect = {
     selected: [],
+
+    isItemSelected: function(item) {
+      // loop over the selected list and see if item is in it
+      for(var i = 0; i <= this.selected.length; i++) {
+        if (this.selected[i] === item) return true;
+      } 
+
+      return false;
+    },
     
     selectItem: function(item) {
       this.selected.push(item);
