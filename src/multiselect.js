@@ -34,6 +34,10 @@
 
       if (typeof this.onSelectItem === 'function')
         this.onSelectItem(item);
+    },
+
+    deselectItem: function(item) {
+      item.deselect(); 
     }
   }
 

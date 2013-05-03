@@ -99,4 +99,17 @@ describe("MultiSelect", function() {
     }); // when a previous item is already selected
   }); // when selecting an item with #selectItem()
 
+  describe("when deselecting and item with #deselectItem", function() {
+    beforeEach(function() {
+      multi.selectItem(selectable);
+    });  
+
+    it("should call the selectables #deselect() method", function() {
+      var spy = sinon.spy(selectable, 'deselect');
+      multi.deselectItem(selectable);
+
+      expect(selectable.deselect).to.have.been.called;
+    });
+  });
+
 }); // SingleSelect
