@@ -18,12 +18,10 @@
     selected: [],
 
     isItemSelected: function(item) {
-      // loop over the selected list and see if item is in it
-      for(var i = 0; i <= this.selected.length; i++) {
-        if (this.selected[i] === item) return true;
-      } 
-
-      return false;
+      var index = this.selected.indexOf(item);
+      
+      if (index >= 0) return true;
+      return false
     },
     
     selectItem: function(item) {
