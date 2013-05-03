@@ -125,6 +125,24 @@ describe("MultiSelect", function() {
       multi.deselectItem(selectable);
       expect(multi.onDeselectItem).to.have.been.calledWith(selectable);
     });
+
+    describe("when deselecting an item not already selected", function() {
+      it("should not call the items #deselect() method", function() {
+        var spy = sinon.spy(selectable2, 'deselect');
+        multi.deselectItem(selectable2);
+        
+        expect(selectable2.deselect).to.not.have.been.called;
+      });
+
+      it("should not call #onDeselectItem if defined", function() {
+        // no-op onDeselectItem
+        multi.onDeselectItem = function() {};
+        var spy = sinon.spy(multi, 'onDeselectItem');
+
+        multi.deselectItem(selectable2);
+        expect(multi.onDeselectItem).not.to.have.been.called;
+      });
+    });
   });
 
 }); // SingleSelect

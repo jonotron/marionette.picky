@@ -36,6 +36,7 @@
 
     deselectItem: function(item) {
       var index = this.selected.indexOf(item);
+      if (index < 0) return; // item is not selected, so can't deselect anyways 
 
       this.selected.splice(index, 1);
       item.deselect(); 
