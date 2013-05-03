@@ -41,6 +41,9 @@
 
       this.selected.splice(index, 1);
       item.deselect(); 
+
+      if (typeof this.onDeselectItem === 'function')
+        this.onDeselectItem(item);
     }
   }
 

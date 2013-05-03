@@ -116,6 +116,15 @@ describe("MultiSelect", function() {
 
       expect(multi.selected).to.not.contain(selectable);
     });
+
+    it("should call #onDeselectItem() if defined", function() {
+      //no-op onDeselectItem
+      multi.onDeselectItem = function() {};
+      var spy = sinon.spy(multi, 'onDeselectItem');
+
+      multi.deselectItem(selectable);
+      expect(multi.onDeselectItem).to.have.been.calledWith(selectable);
+    });
   });
 
 }); // SingleSelect
